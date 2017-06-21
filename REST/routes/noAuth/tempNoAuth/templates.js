@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+/**
+ * En este archivo añadimos todas las rutas templates.
+ * Donde se renderiza a los jades correspondientes de la parte del cliente (website)
+ */
+
 /* GET home page. */
 /*router.get('/index', function(req, res, next) {
     res.render('angularjs/controllers/noAuth/index', { title: 'Express' });

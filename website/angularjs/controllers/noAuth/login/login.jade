@@ -1,12 +1,17 @@
-//
-   Created by danihbelan on 2/6/17.
+//Created by danihbelan on 2/6/17.
+//En este jade se definen los campos y el boton pertenecientes al login
+
+//Con el alias podemos llamar a los metodos correspondientes al objeto del controlador
+
 md-input-container
     label Usuario
+    //Permite guardar en tiempo real lo que se esta escribiendo en la variable
     input(ng-model='lc.user')
 
 md-input-container
     label Contraseña
     input(ng-model='lc.password')
 
+//Con ng-click definimos una accion cuando se clikea sobre el boton
 md-button(ng-click='lc.login()') Login
 

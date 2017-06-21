@@ -1,24 +1,24 @@
 var express = require('express');
 var router = express.Router();
-var _ = require('lodash')
-var mysql =require('../query')
+var _ = require('lodash');
+var mysql =require('../query'); //Esta variable invoca el objeto con las querys
 
 /**
- * Esta ruta renderiza el index del cliente.
+ * Esta ruta renderiza el layout del cliente.
  */
 router.get('/', function(req, res, next) {
     res.render('views/layout');
 });
 
-router.get('/prueba', function(req, res, next) {
+/*router.get('/prueba', function(req, res, next) {
     res.render('prueba');
 });
 
 router.get('/resource', function(req, res, next) {
     var miJSON = {autorizado: "ok"}
     res.status(200).json(miJSON);
+});*/
 
-});
 
 /**
  *Funcion encargada de llevar a cabo la query con el registro. Es llamada desde el cliente.
@@ -31,16 +31,16 @@ router.post('/registro', function(req, res, next) {
         return res.status(401).json({Estado: "Faltan datos"})
 
     var values={user: user, password: password}
+    //Con la llmada a mysql.registro hacemos una llamada a la query correspondiente que se encuentra en el fichero query.js
+    //Debemos de pasarle como parametros los valores y la funcion callback
     mysql.registro(values, function (error, result) {
         if (error){
             return res.status(402).json({Estado: "Error en query"})
         }
         res.status(200).json({});
     })
-
-
-
 });
+
 
 /**
  *Funcion encargada de llevar a cabo la query con el login. Es llamada desde el cliente.
@@ -54,6 +54,8 @@ router.post('/login', function(req, res, next) {
         return res.status(401).json({Estado: "Faltan datos"})
 
     var values={user: user, password: password}
+    //Con la llmada a mysql.login hacemos una llamada a la query correspondiente que se encuentra en el fichero query.js
+    //Debemos de pasarle como parametros los valores y la funcion callback
     mysql.login(values, function (error, result) {
         if (error){
             return res.status(402).json({Estado: "Error en query"})

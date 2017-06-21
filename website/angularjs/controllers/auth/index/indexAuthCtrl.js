@@ -1,5 +1,6 @@
 /**
  * Created by danihbelan on 9/6/17.
+ * Controlador del indexAuth
  */
 (function(){
     function indexCtrl() {

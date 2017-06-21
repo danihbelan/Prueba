@@ -1,3 +1,5 @@
+//En este jade se define el marco principal de la pagina
+//En el se definen todas las librerias y script necesarios que se descargaran en el cliente
 
 //ng-app es una directiva para inicializar la aplicacion
 html(ng-app='miApp')
@@ -14,7 +16,7 @@ html(ng-app='miApp')
   //ng-cloak es una directiva que evita el parpadeo de la pagina al cargarla
   body(ng-cloak)
 
-    //ui-view genera las subvistas
+    //ui-view genera el marco
     div(ui-view="")
 
     //Enlaces a los scripts (colocar siempre al final)
