@@ -11,7 +11,7 @@ var router = express.Router();
     res.render('angularjs/controllers/noAuth/index', { title: 'Express' });
 });*/
 
-router.get('/indexNoAuthTemp', function(req, res, next) {
+/*router.get('/indexNoAuthTemp', function(req, res, next) {
     res.render('angularjs/controllers/noAuth/index/indexNoAuth');
 });
 
@@ -21,7 +21,7 @@ router.get('/loginTemp', function(req, res, next) {
 
 router.get('/registroTemp', function(req, res, next) {
     res.render('angularjs/controllers/noAuth/registro/registro');
-});
+});*/
 
 router.get('/indexAuthTemp', function(req, res, next) {
     res.render('angularjs/controllers/auth/index/indexAuth');

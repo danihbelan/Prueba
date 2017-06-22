@@ -30,19 +30,19 @@
             //Definimos el estado abstracto padre noAuth
             .state('noAuth', {
                 abstract: true,
-                templateUrl: '/temp/indexNoAuthTemp'
+                templateUrl: '/tempNoAuth/indexNoAuthTemp'
             })
 
             .state('noAuth.login', {
                 url:"/",
-                templateUrl: '/temp/loginTemp',
+                templateUrl: '/tempNoAuth/loginTemp',
                 controller: 'loginCtrl',
                 controllerAs: 'lc'
             })
 
             .state('noAuth.registro', {
                 url:"/registro",
-                templateUrl: '/temp/registroTemp',
+                templateUrl: '/tempNoAuth/registroTemp',
                 controller: 'registroCtrl',
                 controllerAs: 'rc'
             })
@@ -51,12 +51,12 @@
             //Definimos el estado abstracto padre Auth
             .state('auth', {
                 abstract: true,
-                templateUrl: '/temp/indexAuthTemp'
+                templateUrl: '/tempAuth/indexAuthTemp'
             })
 
             .state('auth.welcome', {
                 url:"/welcome",
-                templateUrl: '/temp/welcomeTemp',
+                templateUrl: '/tempAuth/welcomeTemp',
                 controller: 'welcomeCtrl',
                 controllerAs: 'wc'
             })
