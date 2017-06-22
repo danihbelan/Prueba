@@ -8,7 +8,8 @@ var lodash = require('lodash');
 
 var index = require('./REST/routes/noAuth/routes/index');
 var users = require('./REST/routes/auth/routes/users');
-var temp = require('./REST/routes/noAuth/tempNoAuth/templates');
+var tempNoAuth = require('./REST/routes/noAuth/tempNoAuth/templatesNoAuth');
+var tempAuth = require('./REST/routes/auth/tempAuth/templatesAuth');
 
 var app = express();
 
@@ -27,7 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // **** RUTAS A PARTIR DE AQUI **** //
 app.use('/', index);
 app.use('/users', users);
-app.use('/temp', temp);
+app.use('/tempAuth', tempAuth);
+app.use('/tempNoAuth', tempNoAuth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
