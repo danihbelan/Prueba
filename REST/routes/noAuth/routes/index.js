@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var _ = require('lodash');
 var mysql =require('../query'); //Esta variable invoca el objeto con las querys
+var generateToken=require('../../../../private/serviceToken/generateToken')
 
 /**
  * Esta ruta renderiza el layout del cliente.
@@ -60,7 +61,9 @@ router.post('/login', function(req, res, next) {
         if (error){
             return res.status(402).json({Estado: "Error en query"})
         }
-        res.status(200).json(result);
+        var token = generateToken(result)
+        console.log(token)
+        res.status(200).json({token: token});
     })
 });
 

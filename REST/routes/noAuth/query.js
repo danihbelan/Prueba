@@ -40,7 +40,7 @@ exports.login = function(values, callback) {
         //Para el caso de una respuesta correcta mandamos el callback con el primer parametro a null
         //y en el segundo parametro damos un valor correspondiente. En este caso no es necesario mandar
         //el result obtenido de la funcion callbak, por eso podemos definir un codigo simplemente
-        callback(null, {codigos: 'Existe'})
+        callback(null, results[0].id)
 
     });
 }
