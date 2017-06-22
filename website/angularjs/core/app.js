@@ -3,5 +3,6 @@
  */
 angular.module('miApp', [
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'satellizer'
 ]);
