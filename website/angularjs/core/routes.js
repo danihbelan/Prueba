@@ -15,9 +15,20 @@
  */
 
 (function(){
-    function routes($stateProvider, $urlRouterProvider, $locationProvider){
+    function routes($stateProvider, $urlRouterProvider, $locationProvider, $authProvider){
 
         $locationProvider.html5Mode(true);  //Esta linea hay que ponerla por la documentación
+
+        $authProvider.httpInterceptor = function() { return true; };
+        $authProvider.withCredentials = false;
+        $authProvider.tokenRoot = null;
+        $authProvider.baseUrl = '/';
+        $authProvider.loginUrl = '/login';
+        $authProvider.tokenName = 'token';
+        $authProvider.tokenPrefix = 'satellizer';
+        $authProvider.tokenHeader = 'Authorization';
+        $authProvider.tokenType = 'Bearer';
+        $authProvider.storageType = 'localStorage';
 
         $stateProvider
             /*.state('index', {
@@ -63,7 +74,7 @@
     }
 
     angular.module('miApp')
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', routes])
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$authProvider', routes])
 
 })();
 

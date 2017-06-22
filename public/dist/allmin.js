@@ -3,7 +3,8 @@
  */
 angular.module('miApp', [
     'ui.router',
-    'ngMaterial'
+    'ngMaterial',
+    'satellizer'
 ]);
 
 /**
@@ -23,9 +24,20 @@ angular.module('miApp', [
  */
 
 (function(){
-    function routes($stateProvider, $urlRouterProvider, $locationProvider){
+    function routes($stateProvider, $urlRouterProvider, $locationProvider, $authProvider){
 
         $locationProvider.html5Mode(true);  //Esta linea hay que ponerla por la documentación
+
+        $authProvider.httpInterceptor = function() { return true; };
+        $authProvider.withCredentials = false;
+        $authProvider.tokenRoot = null;
+        $authProvider.baseUrl = '/';
+        $authProvider.loginUrl = '/login';
+        $authProvider.tokenName = 'token';
+        $authProvider.tokenPrefix = 'satellizer';
+        $authProvider.tokenHeader = 'Authorization';
+        $authProvider.tokenType = 'Bearer';
+        $authProvider.storageType = 'localStorage';
 
         $stateProvider
             /*.state('index', {
@@ -71,7 +83,7 @@ angular.module('miApp', [
     }
 
     angular.module('miApp')
-        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', routes])
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$authProvider', routes])
 
 })();
 
@@ -130,7 +142,7 @@ angular.module('miApp', [
  */
 (function(){
     //Añadir directivas al final!!
-    function loginCtrl($http, $state) {
+    function loginCtrl($http, $state, $auth) {
         //La variable vm definen el objeto del controlador
         //de forma que se puede usar en el jade correspondiente
         //a partir del alias
@@ -143,9 +155,9 @@ angular.module('miApp', [
             //La directiva $http permite hacer operaciones HTTP al servidor
             //En este caso hacemos un post a la ruta /login
             //Con then hacemos un Promise (funcion parecida al callback para controlar la asincronía)
-            $http.post('/login', datosLogin).then(
+            $auth.login(datosLogin).then(
                 function (responseOk) {
-                    console.log('Login correcto')
+                    console.log('Login correctoo', responseOk)
                     //Cambiamos de estado con state.go
                     $state.go('auth.welcome')
                 }, function (responseFail) {
@@ -157,7 +169,7 @@ angular.module('miApp', [
 
 
     angular.module('miApp')
-        .controller('loginCtrl', ['$http', '$state', loginCtrl]);
+        .controller('loginCtrl', ['$http', '$state', '$auth', loginCtrl]);
 
 })();
 

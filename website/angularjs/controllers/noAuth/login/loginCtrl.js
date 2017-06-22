@@ -4,7 +4,7 @@
  */
 (function(){
     //Añadir directivas al final!!
-    function loginCtrl($http, $state) {
+    function loginCtrl($http, $state, $auth) {
         //La variable vm definen el objeto del controlador
         //de forma que se puede usar en el jade correspondiente
         //a partir del alias
@@ -17,9 +17,9 @@
             //La directiva $http permite hacer operaciones HTTP al servidor
             //En este caso hacemos un post a la ruta /login
             //Con then hacemos un Promise (funcion parecida al callback para controlar la asincronía)
-            $http.post('/login', datosLogin).then(
+            $auth.login(datosLogin).then(
                 function (responseOk) {
-                    console.log('Login correcto')
+                    console.log('Login correctoo', responseOk)
                     //Cambiamos de estado con state.go
                     $state.go('auth.welcome')
                 }, function (responseFail) {
@@ -31,7 +31,7 @@
 
 
     angular.module('miApp')
-        .controller('loginCtrl', ['$http', '$state', loginCtrl]);
+        .controller('loginCtrl', ['$http', '$state', '$auth', loginCtrl]);
 
 })();
 
