@@ -45,6 +45,7 @@ router.post('/registro', function(req, res, next) {
 
 /**
  *Funcion encargada de llevar a cabo la query con el login. Es llamada desde el cliente.
+ * Ademas se implementa la generacion del token si el login es correcto
  */
 router.post('/login', function(req, res, next) {
     console.log("Nombre y contraseña de usuario: ", req.body)
@@ -56,11 +57,12 @@ router.post('/login', function(req, res, next) {
 
     var values={user: user, password: password}
     //Con la llmada a mysql.login hacemos una llamada a la query correspondiente que se encuentra en el fichero query.js
-    //Debemos de pasarle como parametros los valores y la funcion callback
+    //Debemos de pasarle como parametros los valores y la funcion callback (se hacen callbacks anidados)
     mysql.login(values, function (error, result) {
         if (error){
             return res.status(402).json({Estado: "Error en query"})
         }
+        //Obtenemos el token llamando a la funcion implementada para generar tokens
         var token = generateToken(result)
         console.log(token)
         res.status(200).json({token: token});

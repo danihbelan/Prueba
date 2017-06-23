@@ -46,6 +46,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+  //En caso de no encontrar una coincidencia en las rutas respondemos con la renderización del layout
+  //ya que en este se encuentran todas las librerias y scripts necesarios. (Cuando no haya coincidencia normalmente
+  //habra un estado que responda a dicha ruta por lo que es necesario la carga del layout siempre)
   res.render('views/layout');
 });
 

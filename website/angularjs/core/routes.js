@@ -19,6 +19,8 @@
 
         $locationProvider.html5Mode(true);  //Esta linea hay que ponerla por la documentación
 
+        //La directica $authProvaider permite encapsular todas las peticiones con una cabecera que incluya la
+        //autenticacion
         $authProvider.httpInterceptor = function() { return true; };
         $authProvider.withCredentials = false;
         $authProvider.tokenRoot = null;
@@ -28,7 +30,7 @@
         $authProvider.tokenPrefix = 'satellizer';
         $authProvider.tokenHeader = 'Authorization';
         $authProvider.tokenType = 'Bearer';
-        $authProvider.storageType = 'localStorage';
+        $authProvider.storageType = 'localStorage'; //Define donde se guarda el token en el navegador del cliente
 
         $stateProvider
             /*.state('index', {

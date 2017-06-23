@@ -14,7 +14,8 @@
             console.log('Entro en login')
             var datosLogin={user: vm.user, password: vm.password}
 
-            //La directiva $http permite hacer operaciones HTTP al servidor
+            //La directiva $http permite hacer operaciones HTTP al servidor (Ya no usamos esta!!)
+            //La directiva auth encapsula la operacion HTTP y permite hacer la autenticacion para obtener el token
             //En este caso hacemos un post a la ruta /login
             //Con then hacemos un Promise (funcion parecida al callback para controlar la asincronía)
             $auth.login(datosLogin).then(

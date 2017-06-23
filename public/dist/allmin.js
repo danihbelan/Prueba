@@ -28,6 +28,8 @@ angular.module('miApp', [
 
         $locationProvider.html5Mode(true);  //Esta linea hay que ponerla por la documentación
 
+        //La directica $authProvaider permite encapsular todas las peticiones con una cabecera que incluya la
+        //autenticacion
         $authProvider.httpInterceptor = function() { return true; };
         $authProvider.withCredentials = false;
         $authProvider.tokenRoot = null;
@@ -37,7 +39,7 @@ angular.module('miApp', [
         $authProvider.tokenPrefix = 'satellizer';
         $authProvider.tokenHeader = 'Authorization';
         $authProvider.tokenType = 'Bearer';
-        $authProvider.storageType = 'localStorage';
+        $authProvider.storageType = 'localStorage'; //Define donde se guarda el token en el navegador del cliente
 
         $stateProvider
             /*.state('index', {
@@ -152,7 +154,8 @@ angular.module('miApp', [
             console.log('Entro en login')
             var datosLogin={user: vm.user, password: vm.password}
 
-            //La directiva $http permite hacer operaciones HTTP al servidor
+            //La directiva $http permite hacer operaciones HTTP al servidor (Ya no usamos esta!!)
+            //La directiva auth encapsula la operacion HTTP y permite hacer la autenticacion para obtener el token
             //En este caso hacemos un post a la ruta /login
             //Con then hacemos un Promise (funcion parecida al callback para controlar la asincronía)
             $auth.login(datosLogin).then(
