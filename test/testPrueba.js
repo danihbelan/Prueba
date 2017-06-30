@@ -5,6 +5,7 @@
 var expect = require('chai').expect
 var query = require('../REST/routes/noAuth/query')
 
+
 describe('Given two numbers', function() {
     it('compare both are equals', function () {
         var a = 1;
