@@ -108,22 +108,6 @@ angular.module('miApp', [
 
 /**
  * Created by danihbelan on 9/6/17.
- * Controlador del indexNoAuth
- */
-(function(){
-    function indexCtrl() {
-        var vm = this;
-        console.log('Estamos en indexNoAuthCtrl')
-    }
-
-    angular.module('miApp')
-        .controller('indexCtrl', [indexCtrl]);
-
-})();
-
-
-/**
- * Created by danihbelan on 9/6/17.
  * Controlador del estado welcome
  */
 (function(){
@@ -134,6 +118,22 @@ angular.module('miApp', [
 
     angular.module('miApp')
         .controller('welcomeCtrl', ['$http', welcomeCtrl]);
+
+})();
+
+
+/**
+ * Created by danihbelan on 9/6/17.
+ * Controlador del indexNoAuth
+ */
+(function(){
+    function indexCtrl() {
+        var vm = this;
+        console.log('Estamos en indexNoAuthCtrl')
+    }
+
+    angular.module('miApp')
+        .controller('indexCtrl', [indexCtrl]);
 
 })();
 
