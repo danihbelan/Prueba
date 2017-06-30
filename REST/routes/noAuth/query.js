@@ -55,7 +55,7 @@ exports.login = function(values, callback) {
 exports.registro = function(values, callback) {
     var values = [values.user,values.password]
     var query = 'INSERT INTO users(name, password) ' +
-        'VALUES(? , ?)'
+        'VALUES(? , ?)';
 
     mysql.query(query, values,  function (error, results, fields) {
         if (error) {
