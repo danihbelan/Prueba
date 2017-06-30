@@ -6,11 +6,15 @@
 md-input-container
     label Usuario
     //Permite guardar en tiempo real lo que se esta escribiendo en la variable
-    input(ng-model='lc.user')
+    input(ng-model='lc.user', required='')
+    div(ng-messages='rc.user.$error')
+        div(ng-message='required') This is required.
 
 md-input-container
     label Contraseña
-    input(ng-model='lc.password')
+    input(ng-model='lc.password', required='')
+    div(ng-messages='rc.user.$error')
+        div(ng-message='required') This is required.
 
 //Con ng-click definimos una accion cuando se clikea sobre el boton
 md-button(ng-click='lc.login()') Login

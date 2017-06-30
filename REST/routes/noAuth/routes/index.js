@@ -36,8 +36,11 @@ router.post('/registro', function(req, res, next) {
     //Debemos de pasarle como parametros los valores y la funcion callback
     mysql.registro(values, function (error, result) {
         if (error){
+            console.log('Mensajee en el if')
             return res.status(402).json({Estado: "Error en query"})
+
         }
+        console.log('Mensajee')
         res.status(200).json({});
     })
 });

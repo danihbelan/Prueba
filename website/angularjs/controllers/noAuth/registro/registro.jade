@@ -3,11 +3,17 @@
 
 md-input-container
     label Usuario
-    input(ng-model='rc.user')
+    input(ng-model='rc.user', required='')
+    div(ng-messages='rc.user.$error')
+        div(ng-message='required') This is required.
+
 
 md-input-container
     label Contraseña
-    input(ng-model='rc.password')
+    input(ng-model='rc.password', required='')
+    div(ng-messages='rc.user.$error')
+        div(ng-message='required') This is required.
 
 md-button(ng-click='rc.registro()') Registro
 
+p {{rc.feedback}}
