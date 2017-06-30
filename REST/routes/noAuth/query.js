@@ -31,11 +31,13 @@ exports.login = function(values, callback) {
             return callback(error, null)
         }
 
-        if (results.length != 1)
-            //Este caso no se trata de un error en si mismo sino un error que nosotros
-            //hemos definido por lo tanto el parametro error que mandamos debe ser algun
-            //mensaje que definiremos nosotros mismos
-            return callback({codigos: 'No existe'}, null)
+        if (results.length != 1) {
+
+        //Este caso no se trata de un error en si mismo sino un error que nosotros
+        //hemos definido por lo tanto el parametro error que mandamos debe ser algun
+        //mensaje que definiremos nosotros mismos
+        return callback({codigos: 'No existe'}, null)
+        }
 
         //Para el caso de una respuesta correcta mandamos el callback con el primer parametro a null
         //y en el segundo parametro damos un valor correspondiente. En este caso no es necesario mandar
@@ -46,7 +48,7 @@ exports.login = function(values, callback) {
 }
 
 /**
- * Se trata de una funcion que realiza la query para el login
+ * Se trata de una funcion que realiza la query para el registro
  * La estructura y el funcionamiento es similar a la anterior query
  * (mirar los comentarios de esta)
  * @param values
@@ -54,9 +56,9 @@ exports.login = function(values, callback) {
  */
 exports.registro = function(values, callback) {
     var values = [values.user,values.password]
-    var query = 'INSERT INTO users(name, password) ' +
-        'VALUES(? , ?)'
 
+    query = 'INSERT INTO users(name, password) ' +
+        'VALUES(? , ?)';
     mysql.query(query, values,  function (error, results, fields) {
         if (error) {
             console.error(error)

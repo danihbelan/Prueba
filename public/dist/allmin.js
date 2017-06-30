@@ -187,6 +187,7 @@ angular.module('miApp', [
         var vm = this;
         vm.user=''
         vm.password=''
+        vm.feedback=''
 
         vm.registro=function () {
 
@@ -197,8 +198,10 @@ angular.module('miApp', [
             $http.post('/registro', datosRegistro).then(
                 function (responseOk) {
                     console.log('Registro correcto')
+                    vm.feedback='Usuario registrado con exito'
                 }, function (responseFail) {
                     console.log('Registro incorrecto')
+                    vm.feedback='Usuario ya registrado'
                 }
             )
         }
