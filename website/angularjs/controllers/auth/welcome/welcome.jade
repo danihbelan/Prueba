@@ -1,4 +1,21 @@
 //Created by danihbelan on 2/6/17.
 //Pagina de Bienvenida en la parte autorizada
 
-p Bienvenido
+md-list
+
+    md-subheader.md-no-sticky Lista de empresas
+    //para permitir listar con elementos repetidos: track by $index
+    md-list-item(ng-repeat='empresa in wc.listaEmpresas')
+        p  {{ empresa.nombre }}
+        p  {{ empresa.puntuacion }}
+        md-chips(ng-model='wc.chip')
+            input(ng-model='wc.puntuacion[empresa.id]', type='number', placeholder='Introducir puntuacion')
+
+        md-button(ng-click='wc.puntuaEmpresa(empresa.id)') Puntuar
+
+
+
+
+
+
+

@@ -20,5 +20,9 @@ router.get('/welcomeTemp', function(req, res, next) {
     res.render('angularjs/controllers/Auth/welcome/welcome');
 });
 
+router.get('/registroEmpresaTemp', function(req, res, next) {
+    res.render('angularjs/controllers/Auth/formulario/formulario');
+});
+
 
 module.exports = router;

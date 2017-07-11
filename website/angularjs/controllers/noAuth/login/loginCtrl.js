@@ -20,7 +20,7 @@
             //Con then hacemos un Promise (funcion parecida al callback para controlar la asincronía)
             $auth.login(datosLogin).then(
                 function (responseOk) {
-                    console.log('Login correctoo', responseOk)
+                    console.log('Login correcto', responseOk)
                     //Cambiamos de estado con state.go
                     $state.go('auth.welcome')
                 }, function (responseFail) {

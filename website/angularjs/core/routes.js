@@ -73,6 +73,13 @@
                 controller: 'welcomeCtrl',
                 controllerAs: 'wc'
             })
+
+            .state('auth.formulario', {
+                url:"/registroEmpresa",
+                templateUrl: '/tempAuth/registroEmpresaTemp',
+                controller: 'formularioCtrl',
+                controllerAs: 'fc'
+            })
     }
 
     angular.module('miApp')
