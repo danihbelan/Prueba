@@ -13,15 +13,6 @@ router.get('/', function(req, res, next) {
     res.render('views/layout');
 });
 
-/*router.get('/prueba', function(req, res, next) {
-    res.render('prueba');
-});
-
-router.get('/resource', function(req, res, next) {
-    var miJSON = {autorizado: "ok"}
-    res.status(200).json(miJSON);
-});*/
-
 
 /**
  *Funcion encargada de llevar a cabo la query con el registro. Es llamada desde el cliente.
@@ -38,9 +29,9 @@ router.post('/registro', function(req, res, next) {
     //Debemos de pasarle como parametros los valores y la funcion callback
     mysql.registro(values, function (error, result) {
         if (error)
-            return codigos.responseFail(res,10001)
+            return codigos.responseFail(res,error)
 
-        codigos.responseOk(res,0)
+        codigos.responseOk(res,result)
     })
 });
 
@@ -62,12 +53,11 @@ router.post('/login', function(req, res, next) {
     //Debemos de pasarle como parametros los valores y la funcion callback (se hacen callbacks anidados)
     mysql.login(values, function (error, result) {
         if (error){
-            return codigos.responseFail(res,10000)
+            return codigos.responseFail(res,error)
         }
         //Obtenemos el token llamando a la funcion implementada para generar tokens
         var token = generateToken(result)
         console.log(token)
-        //res.status(200).json({token: token});
         codigos.responseOk(res,0)
     })
 });

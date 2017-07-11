@@ -25,6 +25,7 @@ function errCode(errCode, data){
         case 10002: description = "Error en query registroEmpresa"; break;
         case 10003: description = "Error en query listaEmpresas"; break;
         case 10004: description = "Error en query puntuaEmpresa"; break;
+        case 10005: description = "Error en query getInfoByID"; break;
 
     }
 

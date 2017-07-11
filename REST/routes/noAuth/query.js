@@ -26,22 +26,16 @@ exports.login = function(values, callback) {
         if (error) {
             console.error(error)
             //Devolvemos la función callback con los parametros correspondientes
-            //En este caso al ser error en el primer parametro añadimos el erro
-            //y el segundo lo dejamos a null
-            return callback(error, null)
+            return callback(10000, null)
         }
 
-        if (results.length != 1) {
-
+        if (results.length != 1)
         //Este caso no se trata de un error en si mismo sino un error que nosotros
         //hemos definido por lo tanto el parametro error que mandamos debe ser algun
         //mensaje que definiremos nosotros mismos
-        return callback({codigos: 'No existe'}, null)
-        }
+            return callback(10000, null)
 
-        //Para el caso de una respuesta correcta mandamos el callback con el primer parametro a null
-        //y en el segundo parametro damos un valor correspondiente. En este caso no es necesario mandar
-        //el result obtenido de la funcion callbak, por eso podemos definir un codigo simplemente
+
         callback(null, results[0].id)
 
     });
@@ -62,10 +56,10 @@ exports.registro = function(values, callback) {
     mysql.query(query, values,  function (error, results, fields) {
         if (error) {
             console.error(error)
-            return callback(error, null)
+            return callback(10001, null)
         }
 
-        callback(null, {codigos: 'Registro correcto'})
+        callback(null, 0)
 
     });
 }
