@@ -154,7 +154,6 @@ angular.module('miApp', [
 (function () {
     function welcomeCtrl($http, $state) {
         var vm = this;
-        //vm.puntuacion = []
         vm.puntos = [1, 2, 3, 4, 5]
 
 
