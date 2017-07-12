@@ -2,17 +2,23 @@
 //Pagina de Bienvenida en la parte autorizada
 
 md-list
-
     md-subheader.md-no-sticky Lista de empresas
-    //para permitir listar con elementos repetidos: track by $index
+    //NOTA: para permitir listar con elementos repetidos: track by $index
+
     md-list-item(ng-repeat='empresa in wc.listaEmpresas')
+
         p  {{ empresa.nombre }}
-        p  {{ empresa.puntuacion }}
-        md-chips(ng-model='wc.chip')
-            input(ng-model='wc.puntuacion[empresa.id]', type='number', placeholder='Introducir puntuacion')
+            p  {{ empresa.puntuacion }}
+
+        md-input-container.md-block(flex-gt-sm='')
+            label Puntuacion
+            md-select(ng-model='wc.puntuacion[empresa.id]')
+                md-option(ng-repeat='punto in wc.puntos', value='{{punto}}')
+                    | {{punto}}
 
         md-button(ng-click='wc.puntuaEmpresa(empresa.id)') Puntuar
 
+    p {{wc.feedback}}
 
 
 
