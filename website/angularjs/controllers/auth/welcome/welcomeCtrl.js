@@ -11,8 +11,7 @@
         $http.get('/users/listaEmpresas').then(
             function (responseOk) {
                 vm.feedback = ''
-                vm.listaEmpresas = responseOk.data
-                console.log(vm.listaEmpresas)
+                vm.listaEmpresas = responseOk.data.data
             }, function (responseFail) {
                 vm.feedback = 'No hay empresas registradas'
             }

@@ -27,6 +27,8 @@ function errCode(errCode, data){
         case 10004: description = "Error en query puntuaEmpresa"; break;
         case 10005: description = "Error en query getInfoByID"; break;
 
+        case 10020: description = "Error en la estructura del JSON"; break;
+
     }
 
     var json = {

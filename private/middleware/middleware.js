@@ -17,7 +17,6 @@ exports.tokenMiddleware=function(req, res, next) {
     var token=req.headers.authorization.split(' ')[1]
     try {
         var payload = jwt.decode(token, 'mipass'); //Funcion que decodifica el token
-        console.log('El payload es: ', payload)
         req.idUser=payload.id
         next() //cuando es correcto llamamos a la funcion next() que hara que siga la peticion adelante
     }catch(err){

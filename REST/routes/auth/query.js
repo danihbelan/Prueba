@@ -31,7 +31,7 @@ exports.registroEmpresa = function(values, callback) {
                 console.error(error)
                 return callback(10002, null)
             }
-            callback(null, 0)
+            callback(null, results)
 
         })
     });
@@ -49,7 +49,7 @@ exports.listaEmpresas = function(callback) {
             console.error(error)
             return callback(10003, null)
         }
-        console.log(results)
+
         callback(null, results)
     });
 
@@ -73,8 +73,7 @@ exports.puntuaEmpresa = function(values, callback) {
             console.error(error)
             return callback(10004, null)
         }
-        console.log(results)
-        callback(null, 0)
+        callback(null, results)
     });
 
 }

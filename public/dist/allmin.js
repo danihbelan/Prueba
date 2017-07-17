@@ -99,6 +99,22 @@ angular.module('miApp', [
 
 /**
  * Created by danihbelan on 9/6/17.
+ * Controlador del indexAuth
+ */
+(function(){
+    function indexCtrl() {
+        var vm = this;
+        console.log('Estamos en indexAuthCtrl')
+    }
+
+    angular.module('miApp')
+        .controller('indexCtrl', [indexCtrl]);
+
+})();
+
+
+/**
+ * Created by danihbelan on 9/6/17.
  * Controlador del estado formulario
  */
 (function(){
@@ -133,22 +149,6 @@ angular.module('miApp', [
 
 /**
  * Created by danihbelan on 9/6/17.
- * Controlador del indexAuth
- */
-(function(){
-    function indexCtrl() {
-        var vm = this;
-        console.log('Estamos en indexAuthCtrl')
-    }
-
-    angular.module('miApp')
-        .controller('indexCtrl', [indexCtrl]);
-
-})();
-
-
-/**
- * Created by danihbelan on 9/6/17.
  * Controlador del estado welcome
  */
 (function () {
@@ -160,8 +160,7 @@ angular.module('miApp', [
         $http.get('/users/listaEmpresas').then(
             function (responseOk) {
                 vm.feedback = ''
-                vm.listaEmpresas = responseOk.data
-                console.log(vm.listaEmpresas)
+                vm.listaEmpresas = responseOk.data.data
             }, function (responseFail) {
                 vm.feedback = 'No hay empresas registradas'
             }

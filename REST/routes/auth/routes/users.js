@@ -4,6 +4,7 @@ var query = require('../query')
 var _ = require('lodash')
 var tokenMiddleware = require('../../../../private/middleware/middleware').tokenMiddleware
 var codigos = require('../../../../private/codeWrapper')
+var test = require('../../../../private/middleware/testJSON').test
 
 
 router.use(tokenMiddleware)
@@ -18,20 +19,22 @@ router.get('/pruebaAutorizada', function(req, res, next) {
  * Se hace una query con los datos de la empresa y del usuario que
  * la registra.
  */
-router.post('/registroEmpresa', function(req, res, next) {
-  if(!req.body.empresa)
-    return codigos.responseFail(res,10002)
+router.post('/registroEmpresa', function (req, res, next) {
+    //Validar JSON req.body
+    test(req.body, require('../../../../private/schemas/registroEmpresas').codigoSchema)
 
-  var datos = {empresa: req.body.empresa, id: req.idUser}
-  console.log('Datos: ', datos)
-  query.registroEmpresa(datos, function (error, result) {
-      if(error) {
-          console.log('Entra en el error: ', error)
-          return codigos.responseFail(res, error)
-      }
-      codigos.responseOk(res,result)
+    if (!req.body.empresa)
+        return codigos.responseFail(res, 10002)
 
-  })
+    var datos = {empresa: req.body.empresa, id: req.idUser}
+    console.log('Datos: ', datos)
+    query.registroEmpresa(datos, function (error, result) {
+        if (error)
+            return codigos.responseFail(res, error)
+
+        codigos.responseOk(res, result)
+
+    })
 });
 
 /**
@@ -44,8 +47,8 @@ router.get('/listaEmpresas', function(req, res, next) {
         if (error)
             return codigos.responseFail(res,error)
 
-        //codigos.responseOk(res,0)
-        res.status(200).json(result);
+        codigos.responseOk(res,result)
+        //res.status(200).json(result);
 
     })
 });
@@ -58,6 +61,9 @@ router.get('/listaEmpresas', function(req, res, next) {
  * el valor de la puntuacion media.
  */
 router.post('/puntuaEmpresa', function(req, res, next) {
+    //Validar JSON req.body
+    test(req.body, require('../../../../private/schemas/puntuaEmpresa').codigoSchema)
+
     if(!req.body.id)
         return codigos.responseFail(res,10004)
 
@@ -70,8 +76,6 @@ router.post('/puntuaEmpresa', function(req, res, next) {
         var punt = result[0].puntuacion
         var n_punts = result[0].n_puntuaciones
         datos.puntuacion = punt*(n_punts/(n_punts+1)) + datos.puntuacion*(1/(n_punts+1))
-        console.log('Nueva puntuacion: ', datos)
-
 
         //Realizamos una query para añadir una puntuacion a una empresa
         query.puntuaEmpresa(datos, function (error, result) {

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var mysql =require('../query'); //Esta variable invoca el objeto con las querys
 var generateToken=require('../../../../private/serviceToken/generateToken')
 var codigos = require('../../../../private/codeWrapper')
+var test = require('../../../../private/middleware/testJSON').test
 
 
 /**
@@ -18,6 +19,9 @@ router.get('/', function(req, res, next) {
  *Funcion encargada de llevar a cabo la query con el registro. Es llamada desde el cliente.
  */
 router.post('/registro', function(req, res, next) {
+    //Validar JSON req.body
+    test(req.body, require('../../../../private/schemas/credenciales').codigoSchema)
+
     console.log("Nombre y contraseña de usuario en registro: ", req.body)
     var user = req.body.user
     var password = req.body.password
@@ -41,6 +45,9 @@ router.post('/registro', function(req, res, next) {
  * Ademas se implementa la generacion del token si el login es correcto
  */
 router.post('/login', function(req, res, next) {
+    //Validar JSON req.body
+    test(req.body, require('../../../../private/schemas/credenciales').codigoSchema)
+
     console.log("Nombre y contraseña de usuario: ", req.body)
     var user = req.body.user
     var password = req.body.password
@@ -49,7 +56,7 @@ router.post('/login', function(req, res, next) {
         return codigos.responseFail(res,10000)
 
     var values={user: user, password: password}
-    //Con la llmada a mysql.login hacemos una llamada a la query correspondiente que se encuentra en el fichero query.js
+    //Con la llamada a mysql.login hacemos una llamada a la query correspondiente que se encuentra en el fichero query.js
     //Debemos de pasarle como parametros los valores y la funcion callback (se hacen callbacks anidados)
     mysql.login(values, function (error, result) {
         if (error){
