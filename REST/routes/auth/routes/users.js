@@ -4,8 +4,6 @@ var query = require('../query')
 var _ = require('lodash')
 var tokenMiddleware = require('../../../../private/middleware/middleware').tokenMiddleware
 var codigos = require('../../../../private/codeWrapper')
-var test = require('../../../../private/middleware/testJSON').test
-
 
 router.use(tokenMiddleware)
 
@@ -21,7 +19,8 @@ router.get('/pruebaAutorizada', function(req, res, next) {
  */
 router.post('/registroEmpresa', function (req, res, next) {
     //Validar JSON req.body
-    test(req.body, require('../../../../private/schemas/registroEmpresas').codigoSchema)
+    var schema = require('../../../../private/schemas/registroEmpresas').codigoSchema
+    router.use(require('../../../../private/middleware/testJSON').test(schema))
 
     if (!req.body.empresa)
         return codigos.responseFail(res, 10002)
@@ -62,7 +61,8 @@ router.get('/listaEmpresas', function(req, res, next) {
  */
 router.post('/puntuaEmpresa', function(req, res, next) {
     //Validar JSON req.body
-    test(req.body, require('../../../../private/schemas/puntuaEmpresa').codigoSchema)
+    var schema = require('../../../../private/schemas/puntuaEmpresa').codigoSchema
+    router.use(require('../../../../private/middleware/testJSON').test(schema))
 
     if(!req.body.id)
         return codigos.responseFail(res,10004)

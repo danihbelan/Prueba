@@ -7,19 +7,23 @@ var codigos = require('../codeWrapper')
 
 /**
  * Funcion encargada de comprobar la validacion de un JSON
- * @param data: req.body de la peticion
- * @param schema: esquma de validacion del JSON
+ * @param schema: esquema de validacion del JSON
  */
-exports.test = function(data, schema) {
+exports.test = function(schema) {
+    console.log('Entra en test');
+    return function (req, res, next) {
+        console.log('Entra en return');
+        var validate = ajv.compile(schema);
+        //var valid = validate(req.body);
+        var valid = validate({id: 32});
 
-    var validate = ajv.compile(schema);
-    var valid = validate(data);
-
-    if (valid) {
-        console.log('Valid!');
-    }
-    else {
-        console.log('Invalid: ' + ajv.errorsText(validate.errors));
-        return codigos.responseFail(res, 10020)
+        if (valid) {
+            console.log('Valid!');
+            next()
+        }
+        else {
+            console.log('Invalid: ' + ajv.errorsText(validate.errors));
+            res.status(403).json(codigos.responseForbidden(res, 10020));
+        }
     }
 }
