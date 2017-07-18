@@ -14,8 +14,7 @@ exports.test = function(schema) {
     return function (req, res, next) {
         console.log('Entra en return');
         var validate = ajv.compile(schema);
-        //var valid = validate(req.body);
-        var valid = validate({id: 32});
+        var valid = validate(req.body);
 
         if (valid) {
             console.log('Valid!');
