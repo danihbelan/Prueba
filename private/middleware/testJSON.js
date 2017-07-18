@@ -10,9 +10,7 @@ var codigos = require('../codeWrapper')
  * @param schema: esquema de validacion del JSON
  */
 exports.test = function(schema) {
-    console.log('Entra en test');
     return function (req, res, next) {
-        console.log('Entra en return');
         var validate = ajv.compile(schema);
         var valid = validate(req.body);
 

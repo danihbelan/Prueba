@@ -10,7 +10,7 @@ exports.codigoSchema = {
             "type": "integer"
         },
         "puntuacion": {
-            "type": "integer"
+            "type": "string"
         }
     },
     "required": [

@@ -99,22 +99,6 @@ angular.module('miApp', [
 
 /**
  * Created by danihbelan on 9/6/17.
- * Controlador del indexAuth
- */
-(function(){
-    function indexCtrl() {
-        var vm = this;
-        console.log('Estamos en indexAuthCtrl')
-    }
-
-    angular.module('miApp')
-        .controller('indexCtrl', [indexCtrl]);
-
-})();
-
-
-/**
- * Created by danihbelan on 9/6/17.
  * Controlador del estado formulario
  */
 (function(){
@@ -143,6 +127,22 @@ angular.module('miApp', [
 
     angular.module('miApp')
         .controller('formularioCtrl', ['$http', formularioCtrl]);
+
+})();
+
+
+/**
+ * Created by danihbelan on 9/6/17.
+ * Controlador del indexAuth
+ */
+(function(){
+    function indexCtrl() {
+        var vm = this;
+        console.log('Estamos en indexAuthCtrl')
+    }
+
+    angular.module('miApp')
+        .controller('indexCtrl', [indexCtrl]);
 
 })();
 

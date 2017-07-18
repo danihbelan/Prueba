@@ -5,6 +5,10 @@ var mysql =require('../query'); //Esta variable invoca el objeto con las querys
 var generateToken=require('../../../../private/serviceToken/generateToken')
 var codigos = require('../../../../private/codeWrapper')
 
+var middlewareJSON = require('../../../../private/middleware/testJSON')
+var schemaCredenciales = require('../../../../private/schemas/credenciales').codigoSchema
+
+
 /**
  * Esta ruta renderiza el layout del cliente.
  */
@@ -15,11 +19,9 @@ router.get('/', function(req, res, next) {
 
 /**
  *Funcion encargada de llevar a cabo la query con el registro. Es llamada desde el cliente.
+ *En la propia ruta se define la llamada al middleware encargado de validar el JSON del req.body
  */
-router.post('/registro', function(req, res, next) {
-    //Validar JSON req.body
-    var schema = require('../../../../private/schemas/credenciales').codigoSchema
-    router.use(require('../../../../private/middleware/testJSON').test(schema))
+router.post('/registro', middlewareJSON.test(schemaCredenciales), function(req, res, next) {
 
     console.log("Nombre y contraseña de usuario en registro: ", req.body)
     var user = req.body.user
@@ -41,12 +43,10 @@ router.post('/registro', function(req, res, next) {
 
 /**
  *Funcion encargada de llevar a cabo la query con el login. Es llamada desde el cliente.
- * Ademas se implementa la generacion del token si el login es correcto
+ *Ademas se implementa la generacion del token si el login es correcto
+ *En la propia ruta se define la llamada al middleware encargado de validar el JSON del req.body
  */
-router.post('/login', function(req, res, next) {
-    //Validar JSON req.body
-    var schema = require('../../../../private/schemas/credenciales').codigoSchema
-    router.use(require('../../../../private/middleware/testJSON').test(schema))
+router.post('/login', middlewareJSON.test(schemaCredenciales), function(req, res, next) {
 
     console.log("Nombre y contraseña de usuario: ", req.body)
     var user = req.body.user

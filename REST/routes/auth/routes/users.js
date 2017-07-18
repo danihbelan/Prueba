@@ -5,6 +5,11 @@ var _ = require('lodash')
 var tokenMiddleware = require('../../../../private/middleware/middleware').tokenMiddleware
 var codigos = require('../../../../private/codeWrapper')
 
+var middlewareJSON = require('../../../../private/middleware/testJSON')
+var schemaPuntuaEmpresa = require('../../../../private/schemas/puntuaEmpresa').codigoSchema
+var schemaRegistroEmpresa = require('../../../../private/schemas/registroEmpresas').codigoSchema
+
+
 router.use(tokenMiddleware)
 
 /* GET users listing. */
@@ -16,11 +21,9 @@ router.get('/pruebaAutorizada', function(req, res, next) {
  * Ruta encargada de las peticiones del registro de una empresa.
  * Se hace una query con los datos de la empresa y del usuario que
  * la registra.
+ * En la propia ruta se define la llamada al middleware encargado de validar el JSON del req.body
  */
-router.post('/registroEmpresa', function (req, res, next) {
-    //Validar JSON req.body
-    var schema = require('../../../../private/schemas/registroEmpresas').codigoSchema
-    router.use(require('../../../../private/middleware/testJSON').test(schema))
+router.post('/registroEmpresa', middlewareJSON.test(schemaRegistroEmpresa), function (req, res, next) {
 
     if (!req.body.empresa)
         return codigos.responseFail(res, 10002)
@@ -58,11 +61,9 @@ router.get('/listaEmpresas', function(req, res, next) {
  * a puntuar (puntuacion actual y numero de votos). Una vez obtenida la
  * puntuacion se calcula la nueva media y se hace una query para actualizar
  * el valor de la puntuacion media.
+ * En la propia ruta se define la llamada al middleware encargado de validar el JSON del req.body
  */
-router.post('/puntuaEmpresa', function(req, res, next) {
-    //Validar JSON req.body
-    var schema = require('../../../../private/schemas/puntuaEmpresa').codigoSchema
-    router.use(require('../../../../private/middleware/testJSON').test(schema))
+router.post('/puntuaEmpresa', middlewareJSON.test(schemaPuntuaEmpresa), function(req, res, next) {
 
     if(!req.body.id)
         return codigos.responseFail(res,10004)
